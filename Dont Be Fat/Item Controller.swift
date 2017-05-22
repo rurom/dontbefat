@@ -26,14 +26,14 @@ class ItemController {
         
         
         if randonNum > 1 {
-            let randomHealthy:UInt32 = arc4random_uniform(13)
+            let randomHealthy:UInt32 = arc4random_uniform(14)
             
             item = SKSpriteNode(imageNamed: "healthy \(randomHealthy)")
             item!.name = "healthy"
             item!.physicsBody = SKPhysicsBody(circleOfRadius: item!.size.height / 2)
             
         } else {
-            let randomUnhealthy:UInt32 = arc4random_uniform(19)
+            let randomUnhealthy:UInt32 = arc4random_uniform(18)
             
             item = SKSpriteNode(imageNamed: "unhealthy \(randomUnhealthy)")
             item!.name = "unhealthy"
