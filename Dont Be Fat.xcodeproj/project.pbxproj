@@ -8,26 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		9320C3E91EBF0F5D005EAF66 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9320C3E81EBF0F5D005EAF66 /* AppDelegate.swift */; };
-		9320C3EB1EBF0F5D005EAF66 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9320C3EA1EBF0F5D005EAF66 /* GameScene.sks */; };
 		9320C3ED1EBF0F5D005EAF66 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9320C3EC1EBF0F5D005EAF66 /* Actions.sks */; };
-		9320C3EF1EBF0F5D005EAF66 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9320C3EE1EBF0F5D005EAF66 /* GameScene.swift */; };
 		9320C3F11EBF0F5D005EAF66 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9320C3F01EBF0F5D005EAF66 /* GameViewController.swift */; };
 		9320C3F41EBF0F5D005EAF66 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9320C3F21EBF0F5D005EAF66 /* Main.storyboard */; };
 		9320C3F61EBF0F5D005EAF66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9320C3F51EBF0F5D005EAF66 /* Assets.xcassets */; };
 		9320C3F91EBF0F5D005EAF66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9320C3F71EBF0F5D005EAF66 /* LaunchScreen.storyboard */; };
+		9320C4021EBF1330005EAF66 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9320C4011EBF1330005EAF66 /* MainMenu.sks */; };
+		9320C4061EBF13C4005EAF66 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9320C4051EBF13C4005EAF66 /* MainMenuScene.swift */; };
+		9320C4081EBF1597005EAF66 /* GamePlay.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9320C4071EBF1597005EAF66 /* GamePlay.sks */; };
+		9320C40A1EBF15D6005EAF66 /* GameplayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9320C4091EBF15D6005EAF66 /* GameplayScene.swift */; };
+		932DCE821EC5D5F4000D05C2 /* Item Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932DCE811EC5D5F4000D05C2 /* Item Controller.swift */; };
+		9334160A1EC3076800CA131D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 933416091EC3076800CA131D /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9320C3E51EBF0F5D005EAF66 /* Dont Be Fat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dont Be Fat.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9320C3E81EBF0F5D005EAF66 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9320C3EA1EBF0F5D005EAF66 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
 		9320C3EC1EBF0F5D005EAF66 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
-		9320C3EE1EBF0F5D005EAF66 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		9320C3F01EBF0F5D005EAF66 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		9320C3F31EBF0F5D005EAF66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9320C3F51EBF0F5D005EAF66 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9320C3F81EBF0F5D005EAF66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9320C3FA1EBF0F5D005EAF66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9320C4011EBF1330005EAF66 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
+		9320C4051EBF13C4005EAF66 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
+		9320C4071EBF1597005EAF66 /* GamePlay.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GamePlay.sks; sourceTree = "<group>"; };
+		9320C4091EBF15D6005EAF66 /* GameplayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameplayScene.swift; sourceTree = "<group>"; };
+		932DCE811EC5D5F4000D05C2 /* Item Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item Controller.swift"; sourceTree = "<group>"; };
+		933416091EC3076800CA131D /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,10 +68,10 @@
 		9320C3E71EBF0F5D005EAF66 /* Dont Be Fat */ = {
 			isa = PBXGroup;
 			children = (
+				9320C4031EBF13A3005EAF66 /* Classes */,
+				9320C4001EBF130F005EAF66 /* Scenes */,
 				9320C3E81EBF0F5D005EAF66 /* AppDelegate.swift */,
-				9320C3EA1EBF0F5D005EAF66 /* GameScene.sks */,
 				9320C3EC1EBF0F5D005EAF66 /* Actions.sks */,
-				9320C3EE1EBF0F5D005EAF66 /* GameScene.swift */,
 				9320C3F01EBF0F5D005EAF66 /* GameViewController.swift */,
 				9320C3F21EBF0F5D005EAF66 /* Main.storyboard */,
 				9320C3F51EBF0F5D005EAF66 /* Assets.xcassets */,
@@ -71,6 +79,50 @@
 				9320C3FA1EBF0F5D005EAF66 /* Info.plist */,
 			);
 			path = "Dont Be Fat";
+			sourceTree = "<group>";
+		};
+		9320C4001EBF130F005EAF66 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9320C4011EBF1330005EAF66 /* MainMenu.sks */,
+				9320C4071EBF1597005EAF66 /* GamePlay.sks */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
+		9320C4031EBF13A3005EAF66 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				932DCE801EC5D5CE000D05C2 /* ItemsController Class */,
+				933416081EC3073600CA131D /* Player Class */,
+				9320C4041EBF13AA005EAF66 /* Scene Classes */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		9320C4041EBF13AA005EAF66 /* Scene Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9320C4051EBF13C4005EAF66 /* MainMenuScene.swift */,
+				9320C4091EBF15D6005EAF66 /* GameplayScene.swift */,
+			);
+			name = "Scene Classes";
+			sourceTree = "<group>";
+		};
+		932DCE801EC5D5CE000D05C2 /* ItemsController Class */ = {
+			isa = PBXGroup;
+			children = (
+				932DCE811EC5D5F4000D05C2 /* Item Controller.swift */,
+			);
+			name = "ItemsController Class";
+			sourceTree = "<group>";
+		};
+		933416081EC3073600CA131D /* Player Class */ = {
+			isa = PBXGroup;
+			children = (
+				933416091EC3076800CA131D /* Player.swift */,
+			);
+			name = "Player Class";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -133,8 +185,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9320C4081EBF1597005EAF66 /* GamePlay.sks in Resources */,
 				9320C3F41EBF0F5D005EAF66 /* Main.storyboard in Resources */,
-				9320C3EB1EBF0F5D005EAF66 /* GameScene.sks in Resources */,
+				9320C4021EBF1330005EAF66 /* MainMenu.sks in Resources */,
 				9320C3F61EBF0F5D005EAF66 /* Assets.xcassets in Resources */,
 				9320C3F91EBF0F5D005EAF66 /* LaunchScreen.storyboard in Resources */,
 				9320C3ED1EBF0F5D005EAF66 /* Actions.sks in Resources */,
@@ -148,9 +201,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9320C3EF1EBF0F5D005EAF66 /* GameScene.swift in Sources */,
+				9320C40A1EBF15D6005EAF66 /* GameplayScene.swift in Sources */,
 				9320C3F11EBF0F5D005EAF66 /* GameViewController.swift in Sources */,
+				9320C4061EBF13C4005EAF66 /* MainMenuScene.swift in Sources */,
+				9334160A1EC3076800CA131D /* Player.swift in Sources */,
 				9320C3E91EBF0F5D005EAF66 /* AppDelegate.swift in Sources */,
+				932DCE821EC5D5F4000D05C2 /* Item Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +370,7 @@
 				9320C3FF1EBF0F5D005EAF66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
