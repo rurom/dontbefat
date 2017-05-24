@@ -22,6 +22,11 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     
     private var score = 0
     
+    private var lives:Int = 3
+    private var dietBonus:Int = 0
+    
+    private var playerSize:CGFloat = 1.0
+    
     
     override func didMove(to view: SKView) {
         
@@ -97,32 +102,96 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             score += 1
             scoreLbl?.text = String(score)
             print("i have collided with HEALTHY!")
+            
+            if lives == 2 {
+                dietBonus += 1
+                print("dietBonus +1! DietBonus Total =\(dietBonus)")
+                print("Total lives =\(lives)")
+                if dietBonus == 3 {
+                     lives += 1
+                     dietBonus = 0
+                    firstBody.node?.xScale = CGFloat(1.0)
+                }
+            } else if lives == 1 {
+                    dietBonus += 1
+                    print("dietBonus +1! DietBonus Total =\(dietBonus)")
+                    print("Total lives =\(lives)")
+                    if dietBonus == 3 {
+                        lives += 1
+                        dietBonus = 0
+                        firstBody.node?.xScale = CGFloat(2.0)
+                    }
+                }
+            
             secondBody.node?.removeFromParent()
         }
         
         if firstBody.node?.name == "boyPlayer" && secondBody.node?.name == "unhealthy" {
             print("oh SHIT!")
             
-            //firstBody.node?.removeFromParent()
-            //secondBody.node?.removeFromParent()
+            if lives == 3 {
+                lives -= 1
+                dietBonus = 0
+                firstBody.node?.xScale = CGFloat(2.0)
+            } else if lives == 2 {
+                lives -= 1
+                dietBonus = 0
+                firstBody.node?.xScale = CGFloat(2.8)
+            } else {
+                print("GAME OVER")
+                firstBody.node?.removeFromParent()
+                secondBody.node?.removeFromParent()
+                
+                restartTimer()
+            }
             
-            restartTimer()
         }
         
         if firstBody.node?.name == "girlPlayer" && secondBody.node?.name == "healthy" {
             score += 1
             scoreLbl?.text = String(score)
             print("i have collided with HEALTHY!")
+            
+            if lives == 2 {
+                dietBonus += 1
+                print("dietBonus +1! DietBonus Total =\(dietBonus)")
+                print("Total lives =\(lives)")
+                if dietBonus == 3 {
+                    lives += 1
+                    dietBonus = 0
+                    firstBody.node?.xScale = CGFloat(1.0)
+                }
+            } else if lives == 1 {
+                dietBonus += 1
+                print("dietBonus +1! DietBonus Total =\(dietBonus)")
+                print("Total lives =\(lives)")
+                if dietBonus == 3 {
+                    lives += 1
+                    dietBonus = 0
+                    firstBody.node?.xScale = CGFloat(2.0)
+                }
+            }
+            
             secondBody.node?.removeFromParent()
         }
         
         if firstBody.node?.name == "girlPlayer" && secondBody.node?.name == "unhealthy" {
             print("oh SHIT!")
             
-            firstBody.node?.removeFromParent()
-            secondBody.node?.removeFromParent()
-            
-            restartTimer()
+            if lives == 3 {
+                lives -= 1
+                firstBody.node?.xScale = CGFloat(2.0)
+            } else if lives == 2 {
+                lives -= 1
+                firstBody.node?.xScale = CGFloat(2.8)
+            } else {
+                print("GAME OVER")
+                firstBody.node?.removeFromParent()
+                secondBody.node?.removeFromParent()
+                
+                restartTimer()
+            }
+
         }
 
 
