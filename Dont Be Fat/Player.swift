@@ -29,15 +29,6 @@ class Player: SKSpriteNode {
         physicsBody?.contactTestBitMask = CollyderType.FOOD
 
     }
-    
-    func physBody2() {
-        physicsBody = SKPhysicsBody(circleOfRadius: size.height / 3)
-        physicsBody?.affectedByGravity = false
-        physicsBody?.isDynamic = false
-        physicsBody?.categoryBitMask = CollyderType.PLAYER
-        physicsBody?.contactTestBitMask = CollyderType.FOOD
-        
-    }
 
     
     func move(left:Bool) {

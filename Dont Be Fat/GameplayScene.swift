@@ -12,6 +12,14 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     
     private var player: Player?
     
+    private var healthBar: SKSpriteNode?
+    private var healthBar1: SKSpriteNode?
+    private var healthBar2: SKSpriteNode?
+    
+    private var dietBar: SKSpriteNode?
+    private var dietBar1: SKSpriteNode?
+    private var dietBar2: SKSpriteNode?
+    
     private var center = CGFloat()
     
     private var canMove = false, moveLeft = false
@@ -25,7 +33,6 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     private var lives:Int = 3
     private var dietBonus:Int = 0
     
-    private var playerSize:CGFloat = 1.0
     
     
     override func didMove(to view: SKView) {
@@ -48,6 +55,89 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         scoreLbl?.text = "0"
     }
     
+    func manageHealthBars() {
+        
+        let healthBarCount = lives
+        
+        if healthBarCount == 3 {
+            
+            healthBar?.isHidden = false
+            healthBar1?.isHidden = false
+            healthBar2?.isHidden = false
+        
+        } else if healthBarCount == 2 {
+            
+            healthBar?.isHidden = false
+            healthBar1?.isHidden = false
+            healthBar2?.isHidden = true
+           
+        } else if healthBarCount == 1 {
+            
+            healthBar?.isHidden = false
+            healthBar1?.isHidden = true
+            healthBar2?.isHidden = true
+            
+        } else {
+            healthBar?.isHidden = true
+            healthBar1?.isHidden = true
+            healthBar2?.isHidden = true
+            
+        }
+        
+    }
+    
+    func manageDietBonus () {
+        if dietBonus == 0 {
+            dietBar?.isHidden = true
+            dietBar1?.isHidden = true
+            dietBar2?.isHidden = true
+        } else if dietBonus == 1 {
+            dietBar?.isHidden = false
+            dietBar1?.isHidden = true
+            dietBar2?.isHidden = true
+        } else if dietBonus == 2 {
+            dietBar?.isHidden = false
+            dietBar1?.isHidden = false
+            dietBar2?.isHidden = true
+        } else if dietBonus == 3 {
+            dietBar?.isHidden = false
+            dietBar1?.isHidden = false
+            dietBar2?.isHidden = false
+        }
+
+
+    }
+    
+    func healthBarInit () {
+        healthBar = childNode(withName: "healthBar") as? SKSpriteNode!
+        healthBar1 = childNode(withName: "healthBar1") as? SKSpriteNode!
+        healthBar2 = childNode(withName: "healthBar2") as? SKSpriteNode!
+        
+        healthBar!.zPosition = 3
+        healthBar1!.zPosition = 3
+        healthBar2!.zPosition = 3
+        healthBar!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        healthBar1!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        healthBar2!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    }
+    
+    func dietBarInit () {
+        dietBar = childNode(withName: "dietBonus") as? SKSpriteNode!
+        dietBar1 = childNode(withName: "dietBonus1") as? SKSpriteNode!
+        dietBar2 = childNode(withName: "dietBonus2") as? SKSpriteNode!
+        
+        dietBar?.isHidden = true
+        dietBar1?.isHidden = true
+        dietBar2?.isHidden = true
+        
+        dietBar!.zPosition = 3
+        dietBar1!.zPosition = 3
+        dietBar2!.zPosition = 3
+        dietBar!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        dietBar1!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        dietBar2!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        
+    }
     
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -70,7 +160,11 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     
     //Food items spawn timer
     func theSpawntimer() {
-        Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 3)), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
+    }
+    //Food spawn timer for higher difficulty
+    func theSpawntimer1() {
+        Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
     }
     
     //Restart game timer
@@ -105,20 +199,23 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             
             if lives == 2 {
                 dietBonus += 1
-                print("dietBonus +1! DietBonus Total =\(dietBonus)")
-                print("Total lives =\(lives)")
+                manageDietBonus ()
                 if dietBonus == 3 {
                      lives += 1
+                     manageHealthBars()
                      dietBonus = 0
+                     manageDietBonus ()
                     firstBody.node?.xScale = CGFloat(1.0)
                 }
             } else if lives == 1 {
                     dietBonus += 1
-                    print("dietBonus +1! DietBonus Total =\(dietBonus)")
-                    print("Total lives =\(lives)")
+                    manageDietBonus ()
                     if dietBonus == 3 {
                         lives += 1
+                        print("Total lives =\(lives)")
+                        manageHealthBars()
                         dietBonus = 0
+                        manageDietBonus ()
                         firstBody.node?.xScale = CGFloat(2.0)
                     }
                 }
@@ -131,13 +228,22 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             
             if lives == 3 {
                 lives -= 1
+                manageHealthBars()
                 dietBonus = 0
+                manageDietBonus ()
+                
                 firstBody.node?.xScale = CGFloat(2.0)
             } else if lives == 2 {
                 lives -= 1
+                manageHealthBars()
                 dietBonus = 0
+                manageDietBonus ()
                 firstBody.node?.xScale = CGFloat(2.8)
             } else {
+                lives -= 1
+                manageHealthBars()
+                dietBonus = 0
+                manageDietBonus ()
                 print("GAME OVER")
                 firstBody.node?.removeFromParent()
                 secondBody.node?.removeFromParent()
@@ -154,20 +260,24 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             
             if lives == 2 {
                 dietBonus += 1
-                print("dietBonus +1! DietBonus Total =\(dietBonus)")
-                print("Total lives =\(lives)")
+                manageDietBonus ()
                 if dietBonus == 3 {
                     lives += 1
+                    print("Total lives =\(lives)")
+                    manageHealthBars()
                     dietBonus = 0
+                    manageDietBonus ()
                     firstBody.node?.xScale = CGFloat(1.0)
                 }
             } else if lives == 1 {
                 dietBonus += 1
-                print("dietBonus +1! DietBonus Total =\(dietBonus)")
-                print("Total lives =\(lives)")
+                manageDietBonus ()
                 if dietBonus == 3 {
                     lives += 1
+                    print("Total lives =\(lives)")
+                    manageHealthBars()
                     dietBonus = 0
+                    manageDietBonus ()
                     firstBody.node?.xScale = CGFloat(2.0)
                 }
             }
@@ -180,11 +290,21 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             
             if lives == 3 {
                 lives -= 1
+                manageHealthBars()
+                dietBonus = 0
+                manageDietBonus ()
                 firstBody.node?.xScale = CGFloat(2.0)
             } else if lives == 2 {
                 lives -= 1
+                manageHealthBars()
+                dietBonus = 0
+                manageDietBonus ()
                 firstBody.node?.xScale = CGFloat(2.8)
             } else {
+                lives -= 1
+                manageHealthBars()
+                dietBonus = 0
+                manageDietBonus ()
                 print("GAME OVER")
                 firstBody.node?.removeFromParent()
                 secondBody.node?.removeFromParent()
@@ -198,6 +318,9 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     }
 
     private func initializeGame() {
+        
+        healthBarInit ()
+        dietBarInit ()
         
         physicsWorld.contactDelegate = self
         
