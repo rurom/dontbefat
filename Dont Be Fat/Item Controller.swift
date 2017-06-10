@@ -46,8 +46,8 @@ class ItemController {
         item!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         item!.setScale(0.6)
         
-        item!.position.x = randomBetweenNumbers(firstNum: -195, secondNum: 195)
-        item!.position.y = randomBetweenNumbers(firstNum: 0, secondNum: 320)
+        item!.position.x = randomBetweenNumbers(firstNum: -205, secondNum: 205)
+        item!.position.y = randomBetweenNumbers(firstNum: -15, secondNum: 365)
         
         return item!
     }
