@@ -30,7 +30,9 @@ class RulesScene: SKScene {
             rulesPage3 = childNode(withName: "rules3") as? SKSpriteNode
             backToMenu = childNode(withName: "backToMenuBtn") as? SKSpriteNode
             startGame = childNode(withName: "startGameBtn") as? SKSpriteNode
-    
+            
+            rulesPageNumber = 1
+            
             checkCurrentRulesPage()
             
             let swipeRight : UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(RulesScene.swipedRight))
@@ -80,7 +82,7 @@ class RulesScene: SKScene {
                 }
                 
                 
-            }else if atPoint(location).name == "startGameBtn" {
+            } else if atPoint(location).name == "startGameBtn" {
                 if let scene = SelectPlayerScene(fileNamed: "SelectPlayer") {
                     // Set the scale mode to scale to fit the window
                     scene.scaleMode = .aspectFill

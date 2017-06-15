@@ -33,12 +33,16 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     private var lives:Int = 3
     private var dietBonus:Int = 0
     
+    private var itemsSpawnTimeInterval:Float = 1.0
     
+    struct playerScoreData {
+        static var currentPlayerScore: Int = 0
+        static var highestPlayerScore: Int = 0
+    }
     
     override func didMove(to view: SKView) {
         
         initializeGame()
-        
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -53,6 +57,26 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     func scorePoints() {
         scoreLbl = childNode(withName: "scoreLbl") as? SKLabelNode!
         scoreLbl?.text = "0"
+    }
+    
+    func manageItemsSpawnSpeed() {
+        if score < 3 {
+            itemsSpawnTimeInterval = 1.1//Float(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2))
+        } else if score >= 3 && score < 6 {
+            itemsSpawnTimeInterval = 0.9
+        } else if score >= 6 && score < 9 {
+            itemsSpawnTimeInterval = 0.8
+        } else if score >= 9 && score < 12 {
+            itemsSpawnTimeInterval = 0.7
+        } else if score >= 12 && score < 15 {
+            itemsSpawnTimeInterval = 0.6
+        } else if score >= 15 && score < 18 {
+            itemsSpawnTimeInterval = 0.5
+        } else if score >= 18 && score < 21 {
+            itemsSpawnTimeInterval = 0.4
+        } else if score >= 21 && score < 99999 {
+            itemsSpawnTimeInterval = 0.3
+        }
     }
     
     func manageHealthBars() {
@@ -160,16 +184,25 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     
     //Food items spawn timer
     func theSpawntimer() {
-        Timer.scheduledTimer(timeInterval: TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 2)), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: TimeInterval(1.5), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
     }
     //Food spawn timer for higher difficulty
     func theSpawntimer1() {
-        Timer.scheduledTimer(timeInterval: TimeInterval(0.8), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
+        manageItemsSpawnSpeed()
+        Timer.scheduledTimer(timeInterval: TimeInterval(itemsSpawnTimeInterval), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: false)
+        print(itemsSpawnTimeInterval)
+    }
+    
+        //Food spawn timer for higher difficulty 2
+    func theSpawntimer2() {
+        manageItemsSpawnSpeed()
+        Timer.scheduledTimer(timeInterval: TimeInterval(itemsSpawnTimeInterval), target: self, selector: #selector(GameplayScene.theSpawntimer1), userInfo: nil, repeats: true)
+        print(itemsSpawnTimeInterval)
     }
     
     //Restart game timer
     func restartTimer() {
-        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameplayScene.restartGame), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(GameplayScene.gameOver), userInfo: nil, repeats: false)
     }
     
     //Remove items timer
@@ -195,7 +228,8 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         if firstBody.node?.name == "boyPlayer" && secondBody.node?.name == "healthy" {
             score += 1
             scoreLbl?.text = String(score)
-            print("i have collided with HEALTHY!")
+            print("i have collided with HEALTHY!\(itemsSpawnTimeInterval)")
+            
             
             if lives == 2 {
                 dietBonus += 1
@@ -247,6 +281,8 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
                 print("GAME OVER")
                 firstBody.node?.removeFromParent()
                 secondBody.node?.removeFromParent()
+                
+                playerScoreData.currentPlayerScore = score
                 
                 restartTimer()
             }
@@ -309,6 +345,9 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
                 firstBody.node?.removeFromParent()
                 secondBody.node?.removeFromParent()
                 
+                playerScoreData.currentPlayerScore = score
+                
+                
                 restartTimer()
             }
 
@@ -322,6 +361,8 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         healthBarInit ()
         dietBarInit ()
         
+        playerScoreData.currentPlayerScore = 0
+        
         physicsWorld.contactDelegate = self
         
         if playerIndicator == 1 {
@@ -330,7 +371,7 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             theCenter()
             player?.initPlayer()
             scorePoints()
-            theSpawntimer()
+            theSpawntimer2()
             removeItemsTimer()
         } else {
             if playerIndicator == 2 {
@@ -339,7 +380,7 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
                 theCenter()
                 player?.initPlayer()
                 scorePoints()
-                theSpawntimer()
+                theSpawntimer2()
                 removeItemsTimer()
             }
         }
@@ -358,8 +399,8 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         self.scene?.addChild(itemController.spawnItems())
     }
     
-    func restartGame() {
-        if let scene = GameplayScene(fileNamed:"GamePlay") {
+    func gameOver() {
+        if let scene = ResultScreenScene(fileNamed:"ResultScreen") {
             scene.scaleMode = .aspectFill
             view?.presentScene(scene, transition: SKTransition.flipVertical(withDuration: TimeInterval(2)))
         }

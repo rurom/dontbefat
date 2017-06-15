@@ -8,14 +8,18 @@
 
 import SpriteKit
 
-var playerIndicator:Int!
-
+public var playerIndicator:Int!
 private var kitchenBg: SKSpriteNode?
+private var txtSelectLbl: SKLabelNode?
+private var txtPlayerLbl: SKLabelNode?
 private var girlPlayerBtn: SKSpriteNode?
 private var boyPlayerBtn: SKSpriteNode?
 private var backToMenu: SKSpriteNode?
 
+
 class SelectPlayerScene: SKScene {
+    
+    
     
     override func didMove(to view: SKView) {
         
@@ -23,7 +27,8 @@ class SelectPlayerScene: SKScene {
         girlPlayerBtn = childNode(withName: "girlBtn") as? SKSpriteNode
         boyPlayerBtn = childNode(withName: "boyBtn") as? SKSpriteNode
         backToMenu = childNode(withName: "backToMenuBtn") as? SKSpriteNode
-        
+        txtSelectLbl = childNode(withName: "txtSelectLbl") as? SKLabelNode
+        txtPlayerLbl = childNode(withName: "txtPlayerLbl") as? SKLabelNode
     }
 
     
@@ -66,4 +71,5 @@ class SelectPlayerScene: SKScene {
             }
         }
     }
+    
 } //class
