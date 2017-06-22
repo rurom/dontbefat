@@ -32,12 +32,8 @@ class HighscoresScene: SKScene {
                     // Present the scene
                     view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
                 }
-                
-                
             }
         }
     }
-
-    
 
 } // class

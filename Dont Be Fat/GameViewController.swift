@@ -14,14 +14,12 @@ import FBSDKCoreKit
 
 class GameViewController: UIViewController{
     
-    
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+
         if let view = self.view as! SKView? {
+            
             // Load the SKScene from 'GameScene.sks'
             if let scene = LoginScene(fileNamed: "Login") {
                 // Set the scale mode to scale to fit the window
@@ -40,7 +38,7 @@ class GameViewController: UIViewController{
     }
 
     override var shouldAutorotate: Bool {
-        return true
+        return false
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

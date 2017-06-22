@@ -15,12 +15,15 @@ class MainMenuScene: SKScene {
     private var playBtn:SKSpriteNode?
     private var highscoresBtn:SKSpriteNode?
     private var rulesBtn:SKSpriteNode?
+    private var settingsBtn:SKSpriteNode?
+    
     
     override func didMove(to view: SKView) {
         
         playBtn = childNode(withName: "playBtn") as? SKSpriteNode!
         highscoresBtn = childNode(withName: "highscoresBtn") as? SKSpriteNode!
         rulesBtn = childNode(withName: "rulesBtn") as? SKSpriteNode!
+        settingsBtn = childNode(withName: "settingsBtn") as? SKSpriteNode!
         
     }
     
@@ -58,7 +61,17 @@ class MainMenuScene: SKScene {
                     // Present the scene
                     view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
                 }
+            } else if atPoint(location).name == "settingsBtn" {
+                
+                if let scene = SettingsScene(fileNamed: "Settings") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFill
+                    
+                    // Present the scene
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
+                }
             }
+
         }
     }
 

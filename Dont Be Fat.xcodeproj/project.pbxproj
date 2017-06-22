@@ -20,6 +20,8 @@
 		93260C871EEBDDA700A436E2 /* HighscoresScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93260C861EEBDDA700A436E2 /* HighscoresScene.swift */; };
 		93260C891EEBDE0400A436E2 /* Highscores.sks in Resources */ = {isa = PBXBuildFile; fileRef = 93260C881EEBDE0400A436E2 /* Highscores.sks */; };
 		932CE08B1EF7EE6600B16613 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 932CE08A1EF7EE6600B16613 /* GoogleService-Info.plist */; };
+		932CE08D1EF93D7D00B16613 /* Settings.sks in Resources */ = {isa = PBXBuildFile; fileRef = 932CE08C1EF93D7D00B16613 /* Settings.sks */; };
+		932CE08F1EF9436A00B16613 /* SettingsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932CE08E1EF9436A00B16613 /* SettingsScene.swift */; };
 		932DCE821EC5D5F4000D05C2 /* Item Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 932DCE811EC5D5F4000D05C2 /* Item Controller.swift */; };
 		9330CD1C1EEEC39500941929 /* ResultScreen.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9330CD1B1EEEC39500941929 /* ResultScreen.sks */; };
 		9330CD1E1EEEC46F00941929 /* ResultScreenScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9330CD1D1EEEC46F00941929 /* ResultScreenScene.swift */; };
@@ -53,6 +55,8 @@
 		93260C861EEBDDA700A436E2 /* HighscoresScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HighscoresScene.swift; sourceTree = "<group>"; };
 		93260C881EEBDE0400A436E2 /* Highscores.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Highscores.sks; sourceTree = "<group>"; };
 		932CE08A1EF7EE6600B16613 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		932CE08C1EF93D7D00B16613 /* Settings.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Settings.sks; sourceTree = "<group>"; };
+		932CE08E1EF9436A00B16613 /* SettingsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsScene.swift; sourceTree = "<group>"; };
 		932DCE811EC5D5F4000D05C2 /* Item Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Item Controller.swift"; sourceTree = "<group>"; };
 		9330CD1B1EEEC39500941929 /* ResultScreen.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ResultScreen.sks; sourceTree = "<group>"; };
 		9330CD1D1EEEC46F00941929 /* ResultScreenScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultScreenScene.swift; sourceTree = "<group>"; };
@@ -128,13 +132,14 @@
 		9320C4001EBF130F005EAF66 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				9330CD1F1EEF3E0200941929 /* Login.sks */,
+				9391AF501EDFE1CB00397633 /* MainMenu.sks */,
+				932CE08C1EF93D7D00B16613 /* Settings.sks */,
+				93260C881EEBDE0400A436E2 /* Highscores.sks */,
+				9391AF581EEBD68400397633 /* Rules.sks */,
 				9320C4011EBF1330005EAF66 /* SelectPlayer.sks */,
 				9320C4071EBF1597005EAF66 /* GamePlay.sks */,
-				9391AF501EDFE1CB00397633 /* MainMenu.sks */,
-				9391AF581EEBD68400397633 /* Rules.sks */,
-				93260C881EEBDE0400A436E2 /* Highscores.sks */,
 				9330CD1B1EEEC39500941929 /* ResultScreen.sks */,
-				9330CD1F1EEF3E0200941929 /* Login.sks */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -154,6 +159,7 @@
 			children = (
 				9330CD211EEF411800941929 /* LoginScene.swift */,
 				9391AF4E1EDFE19800397633 /* MainMenuScene.swift */,
+				932CE08E1EF9436A00B16613 /* SettingsScene.swift */,
 				93260C861EEBDDA700A436E2 /* HighscoresScene.swift */,
 				9391AF561EEBD65F00397633 /* RulesScene.swift */,
 				9320C4051EBF13C4005EAF66 /* SelectPlayerScene.swift */,
@@ -272,6 +278,7 @@
 				9330CD201EEF3E0200941929 /* Login.sks in Resources */,
 				9320C4021EBF1330005EAF66 /* SelectPlayer.sks in Resources */,
 				9320C3F61EBF0F5D005EAF66 /* Assets.xcassets in Resources */,
+				932CE08D1EF93D7D00B16613 /* Settings.sks in Resources */,
 				9320C3F91EBF0F5D005EAF66 /* LaunchScreen.storyboard in Resources */,
 				9391AF511EDFE1CB00397633 /* MainMenu.sks in Resources */,
 				9320C3ED1EBF0F5D005EAF66 /* Actions.sks in Resources */,
@@ -343,6 +350,7 @@
 				9320C3E91EBF0F5D005EAF66 /* AppDelegate.swift in Sources */,
 				93260C871EEBDDA700A436E2 /* HighscoresScene.swift in Sources */,
 				9391AF4F1EDFE19800397633 /* MainMenuScene.swift in Sources */,
+				932CE08F1EF9436A00B16613 /* SettingsScene.swift in Sources */,
 				9330CD221EEF411800941929 /* LoginScene.swift in Sources */,
 				932DCE821EC5D5F4000D05C2 /* Item Controller.swift in Sources */,
 			);

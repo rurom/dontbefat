@@ -68,6 +68,4 @@ class ResultScreenScene: SKScene {
         }
     }
     
-    
-    
 } // class

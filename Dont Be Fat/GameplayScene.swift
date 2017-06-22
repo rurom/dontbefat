@@ -41,17 +41,10 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         static var highestPlayerScore: Int = 0
     }
     
-//    let spawnNode = SKNode()
     
     override func didMove(to view: SKView) {
         
         initializeGame()
-        
-//        let wait = SKAction.wait(forDuration:TimeInterval(itemsSpawnTimeInterval))
-//        let spawn = SKAction.run(spawnItems)
-//        spawnNode.run(SKAction.repeatForever(SKAction.sequence([wait,spawn])))
-//        addChild(spawnNode)
-//        print(itemsSpawnTimeInterval)
         
     }
     
@@ -75,15 +68,15 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 1.5))
         } else if score >= 5 && score < 10 {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.9, secondNum: 1))
-        } else if score >= 10 && score < 15 {
+        } else if score >= 10 && score < 20 {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.8, secondNum: 0.9))
-        } else if score >= 15 && score < 20 {
+        } else if score >= 20 && score < 40 {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.7, secondNum: 0.8))
-        } else if score >= 20 && score < 30 {
+        } else if score >= 40 && score < 60 {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.6, secondNum: 0.7))
-        } else if score >= 30 && score < 50 {
+        } else if score >= 60 && score < 80 {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.5, secondNum: 0.6))
-        } else if score >= 50 && score < 100 {
+        } else if score >= 80 && score < 100 {
             itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.4, secondNum: 0.5))
         } else if score >= 100 && score < 99999 {
             itemsSpawnTimeInterval = 0.4

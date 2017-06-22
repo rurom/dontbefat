@@ -19,7 +19,6 @@ private var startGame: SKSpriteNode?
 private var rulesPageNumber:Int = 1
 
 
-
 class RulesScene: SKScene {
         
         
