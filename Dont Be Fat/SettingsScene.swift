@@ -8,6 +8,7 @@
 
 import SpriteKit
 import FBSDKLoginKit
+import Firebase
 
 class SettingsScene: SKScene {
     
@@ -28,18 +29,25 @@ class SettingsScene: SKScene {
         //Scaling userName font size depending on length
         let playerLblRect = CGRect(x: -235, y: 265, width:(scene?.frame.width)! - 10, height: 50)
         
-        playerNameLbl?.text = String(LoginScene.getUserName.FB_USER_NAME)
+        playerNameLbl?.text = String(LoginScene.getUserData.FB_USER_NAME)
         //Test for userName font scale "Abduhalabab El Khadi Khacheridi Ahmedopakistan", "Cho Po"
         
         adjustLabelFontSizeToFit(labelNode: playerNameLbl!, rect:playerLblRect)
     
-        
     }
     
-    //Custom Facebook logout
-    func customFbLogout() {
+    //Custom Facebook and Firebase logout
+    func customFbFirLogout() {
         FBSDKLoginManager().logOut()
-        print("Successfully logout!")
+        print("Successfully logout Facebook!")
+        
+        do {
+        try FIRAuth.auth()?.signOut()
+            print("Successfully logout Firebase!")
+        } catch let logoutError {
+            print(logoutError)
+        }
+        LoginScene.getUserData.FB_USER_NAME = ""
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -49,7 +57,7 @@ class SettingsScene: SKScene {
             let location = touch.location(in: self)
             
             if atPoint(location).name == "fbLogoutBtn" {
-                customFbLogout()
+                customFbFirLogout()
                 if let scene = LoginScene(fileNamed: "Login") {
                     // Set the scale mode to scale to fit the window
                     scene.scaleMode = .aspectFill

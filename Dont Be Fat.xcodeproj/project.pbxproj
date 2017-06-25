@@ -33,6 +33,7 @@
 		9391AF511EDFE1CB00397633 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9391AF501EDFE1CB00397633 /* MainMenu.sks */; };
 		9391AF571EEBD66000397633 /* RulesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9391AF561EEBD65F00397633 /* RulesScene.swift */; };
 		9391AF591EEBD68400397633 /* Rules.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9391AF581EEBD68400397633 /* Rules.sks */; };
+		93FDAB441EFD426E00CC982A /* HelpersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FDAB431EFD426E00CC982A /* HelpersScene.swift */; };
 		E78CD76278517EAE6F809F26 /* Pods_Dont_Be_Fat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 58ED711DB79F23A42103A85B /* Pods_Dont_Be_Fat.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +69,7 @@
 		9391AF501EDFE1CB00397633 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenu.sks; sourceTree = "<group>"; };
 		9391AF561EEBD65F00397633 /* RulesScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RulesScene.swift; sourceTree = "<group>"; };
 		9391AF581EEBD68400397633 /* Rules.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rules.sks; sourceTree = "<group>"; };
+		93FDAB431EFD426E00CC982A /* HelpersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelpersScene.swift; sourceTree = "<group>"; };
 		C2023F4DCFE36D9AB6502665 /* Pods-Dont Be Fat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dont Be Fat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dont Be Fat/Pods-Dont Be Fat.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,6 +115,7 @@
 		9320C3E71EBF0F5D005EAF66 /* Dont Be Fat */ = {
 			isa = PBXGroup;
 			children = (
+				93FDAB421EFD425500CC982A /* Helpers */,
 				930458D81EF3E379005D5965 /* Dont Be Fat.entitlements */,
 				93888FBC1EEE9BB000CA3F9B /* Resources */,
 				9320C4031EBF13A3005EAF66 /* Classes */,
@@ -191,6 +194,14 @@
 				93888FBD1EEE9CCA00CA3F9B /* Phosphate-Inline.ttc */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		93FDAB421EFD425500CC982A /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				93FDAB431EFD426E00CC982A /* HelpersScene.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 		B5F60687E4A02463E2EE013C /* Frameworks */ = {
@@ -341,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93FDAB441EFD426E00CC982A /* HelpersScene.swift in Sources */,
 				9330CD1E1EEEC46F00941929 /* ResultScreenScene.swift in Sources */,
 				9320C40A1EBF15D6005EAF66 /* GameplayScene.swift in Sources */,
 				9391AF571EEBD66000397633 /* RulesScene.swift in Sources */,

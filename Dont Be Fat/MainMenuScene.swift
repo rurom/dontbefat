@@ -24,7 +24,7 @@ class MainMenuScene: SKScene {
         highscoresBtn = childNode(withName: "highscoresBtn") as? SKSpriteNode!
         rulesBtn = childNode(withName: "rulesBtn") as? SKSpriteNode!
         settingsBtn = childNode(withName: "settingsBtn") as? SKSpriteNode!
-        
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

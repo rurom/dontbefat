@@ -8,6 +8,8 @@
 
 
 import SpriteKit
+import Firebase
+import FBSDKLoginKit
 
 private var currentScoreLbl: SKLabelNode?
 private var highestScoreLbl: SKLabelNode?
@@ -32,7 +34,16 @@ class ResultScreenScene: SKScene {
         //var highestScore = GameplayScene.playerScoreData.highestPlayerScore
         
         if currentScore > GameplayScene.playerScoreData.highestPlayerScore {
-            GameplayScene.playerScoreData.highestPlayerScore = currentScore        }
+            GameplayScene.playerScoreData.highestPlayerScore = currentScore
+        
+//        if let user = FIRAuth.auth()?.currentUser {
+//            let ref = FIRDatabase.database().reference(fromURL: "https://dont-be-fat-a6f79.firebaseio.com/")
+//            let uid = user.uid
+//            let usersReference = ref.child("users").child(uid)
+//            let values = ["name": userName, "email": userEmail, "facebookID": fbUserID,]
+//            }
+//        
+        }
         
         currentScoreLbl?.text = String(currentScore)
         highestScoreLbl?.text = String(GameplayScene.playerScoreData.highestPlayerScore)
