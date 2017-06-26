@@ -7,6 +7,7 @@
 //
 
 import SpriteKit
+import AudioToolbox
 
 class GameplayScene:SKScene, SKPhysicsContactDelegate {
     
@@ -194,19 +195,6 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         let spawnSequence = SKAction.sequence([spawnAction, spawnDelay])
         run(SKAction.repeatForever(spawnSequence), withKey: spawnKey) // run action with key so you can cancel it later
     }
-    //Food spawn timer for higher difficulty
-    func theSpawntimer1() {
-        manageItemsSpawnSpeed()
-        Timer.scheduledTimer(timeInterval: TimeInterval(itemsSpawnTimeInterval), target: self, selector: #selector(GameplayScene.spawnItems), userInfo: nil, repeats: true)
-        print(itemsSpawnTimeInterval)
-    }
-    
-    //Food spawn timer for higher difficulty 2
-    func theSpawntimer2() {
-        manageItemsSpawnSpeed()
-        Timer.scheduledTimer(timeInterval: TimeInterval(itemsSpawnTimeInterval), target: self, selector: #selector(GameplayScene.theSpawntimer1), userInfo: nil, repeats: true)
-        print(itemsSpawnTimeInterval)
-    }
     
     //Restart game timer
     func restartTimer() {
@@ -267,6 +255,7 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         }
         
         if firstBody.node?.name == "boyPlayer" && secondBody.node?.name == "unhealthy" {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //add vibration
             print("oh SHIT!")
             
             if lives == 3 {
@@ -332,6 +321,7 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         }
         
         if firstBody.node?.name == "girlPlayer" && secondBody.node?.name == "unhealthy" {
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //add vibration
             print("oh SHIT!")
             
             if lives == 3 {

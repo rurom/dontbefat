@@ -17,6 +17,7 @@ private var txtCurrentScoreLbl: SKLabelNode?
 private var txtHighestScoreLbl: SKLabelNode?
 private var playAgain: SKSpriteNode?
 private var backToMenu: SKSpriteNode?
+private var highestScore:String?
 
 
 class ResultScreenScene: SKScene {
@@ -35,20 +36,53 @@ class ResultScreenScene: SKScene {
         
         if currentScore > GameplayScene.playerScoreData.highestPlayerScore {
             GameplayScene.playerScoreData.highestPlayerScore = currentScore
-        
-//        if let user = FIRAuth.auth()?.currentUser {
-//            let ref = FIRDatabase.database().reference(fromURL: "https://dont-be-fat-a6f79.firebaseio.com/")
-//            let uid = user.uid
-//            let usersReference = ref.child("users").child(uid)
-//            let values = ["name": userName, "email": userEmail, "facebookID": fbUserID,]
-//            }
-//        
+        }
+            // adding a reference to firebase database
+            let ref = FIRDatabase.database().reference(fromURL: "https://dont-be-fat-a6f79.firebaseio.com/")
+            // create a child reference - uid will let us wrap each users data in a unique user id for later reference
+            let uid = FIRAuth.auth()?.currentUser?.uid
+            let usersReference = ref.child("users").child(uid!)
+            
+            usersReference.observeSingleEvent(of: .value, with: { (snapshot) in
+                print(snapshot)
+                if let dictionary = snapshot.value as? [String:AnyObject] {
+                   highestScore = dictionary ["highestScore"] as? String
+                }
+            
+            print(highestScore ?? "")
+            print(GameplayScene.playerScoreData.highestPlayerScore)
+            
+            if Int(highestScore!)! > GameplayScene.playerScoreData.highestPlayerScore {
+                GameplayScene.playerScoreData.highestPlayerScore = Int(highestScore!)!
+                self.printResults()
+            } else {
+                self.printResults()
+            let bestScore:String = (String(GameplayScene.playerScoreData.highestPlayerScore))
+            
+            let values = ["highestScore":bestScore]
+            
+            // update our databse by using the child database reference above called usersReference
+            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
+                // if there's an error in saving to our firebase database
+                if err != nil {
+                    print(err ?? "")
+                    return
+                }
+                // no error, so it means we've saved the user into our firebase database successfully
+                print("Save the SCORE successfully into Firebase database")
+                
+             })
+                }
+
+          })
+            
         }
         
-        currentScoreLbl?.text = String(currentScore)
+    
+    
+    func printResults() {
+        currentScoreLbl?.text = String(GameplayScene.playerScoreData.currentPlayerScore)
         highestScoreLbl?.text = String(GameplayScene.playerScoreData.highestPlayerScore)
-        
-        
     }
     
     

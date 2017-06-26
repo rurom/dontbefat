@@ -77,36 +77,9 @@ class LoginScene: SKScene {
                             } else if snapshot.hasChild((FIRAuth.auth()!.currentUser!.uid)){
                                 
                                 print("This user already exist")
-                                
-                                // just get info about existed user
-                                FBSDKGraphRequest(graphPath: "/me", parameters: ["fields":"id, name, email"]).start { (connection, result, err) in
-                                    
-                                    if err != nil {
-                                        print("Failed to start graph request: ",err ?? "")
-                                        return
-                                    }
-                                    
-                                    guard let userInfo = result as? [String:Any] else { return }
-                                    
-                                    // Facebook user name:
-                                    let userName = userInfo["name"] as! String
-                                    LoginScene.getUserData.FB_USER_NAME = userName
-                                    print("User Name is: \(userName)")
-                                    
-                                    // Facebook user email:
-                                    let userEmail:String? = userInfo["email"] as? String
-                                    print("User Email is: ", userEmail ?? "noEmail")
-                                    
-                                    // Facebook user ID:
-                                    let fbUserID:String? = userInfo["id"]! as? String
-                                    print("Users Facebook ID is:", fbUserID ?? "noId")
-                                    
-                                    //Best score of current user
-                                    let bestScore:String = (String(GameplayScene.playerScoreData.highestPlayerScore))
-                                    print("Users best score is: \(bestScore)")
-                                    
+
                                     print("SUCCESSFULLY login with user: ", user ?? "")
-                                }
+
                             } else  {
                                 
                                 // performing the Facebook graph request to get the user data that just logged in so we can assign this stuff to Firebase database
@@ -167,6 +140,7 @@ class LoginScene: SKScene {
             customFbLoginSaveUserIntoFIB()
             //Load MainMenu with small delay
             Timer.scheduledTimer(timeInterval: TimeInterval(0.9), target: self, selector: #selector(goToMainMenu), userInfo: nil, repeats: false)
+                fbLoginBtn?.isHidden = true
                             }
                         }
                     }

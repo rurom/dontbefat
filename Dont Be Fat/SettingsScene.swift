@@ -9,6 +9,7 @@
 import SpriteKit
 import FBSDKLoginKit
 import Firebase
+import UIKit
 
 class SettingsScene: SKScene {
     
@@ -16,25 +17,63 @@ class SettingsScene: SKScene {
     private var backToMenu:SKSpriteNode?
     private var highestScoreLbl: SKLabelNode?
     private var playerNameLbl: SKLabelNode?
+    private var highestScore:String?
+    private var PLAYERNAME:String?
+    private var txtHighestScoreLbl:SKLabelNode?
+    
     
     override func didMove(to view: SKView) {
+        
+       //ActivityIndicator for preloading data from Firebase DB
+        let activityInd = UIActivityIndicatorView()
+        activityInd.color = UIColor.black
+        let transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
+        activityInd.transform = transform
+        activityInd.center = CGPoint(x:view.bounds.midX, y:view.bounds.midY)
+        activityInd.layer.zPosition = 6
+        activityInd.startAnimating()
+        scene!.view?.addSubview(activityInd)
+        
         
         fbLogoutBtn = childNode(withName: "fbLogoutBtn") as? SKSpriteNode!
         backToMenu = childNode(withName: "backToMenuBtn") as? SKSpriteNode!
         highestScoreLbl = childNode(withName: "highestScoreLbl") as? SKLabelNode!
         playerNameLbl = childNode(withName: "playerNameLbl") as? SKLabelNode!
+        txtHighestScoreLbl = childNode(withName: "txtHighestScoreLbl") as? SKLabelNode!
         
-        highestScoreLbl?.text = String(GameplayScene.playerScoreData.highestPlayerScore)
-
-        //Scaling userName font size depending on length
-        let playerLblRect = CGRect(x: -235, y: 265, width:(scene?.frame.width)! - 10, height: 50)
+        playerNameLbl?.isHidden = true
+        highestScoreLbl?.isHidden = true
+        playerNameLbl?.isHidden = true
+        txtHighestScoreLbl?.isHidden = true
         
-        playerNameLbl?.text = String(LoginScene.getUserData.FB_USER_NAME)
-        //Test for userName font scale "Abduhalabab El Khadi Khacheridi Ahmedopakistan", "Cho Po"
+        // adding a reference to firebase database
+        let ref = FIRDatabase.database().reference(fromURL: "https://dont-be-fat-a6f79.firebaseio.com/")
+        // create a child reference - uid will let us wrap each users data in a unique user id for later reference
+        let uid = FIRAuth.auth()?.currentUser?.uid
+        let usersReference = ref.child("users").child(uid!)
         
-        adjustLabelFontSizeToFit(labelNode: playerNameLbl!, rect:playerLblRect)
-    
+        usersReference.observeSingleEvent(of: .value, with: { (snapshot) in
+            print(snapshot)
+            if let dictionary = snapshot.value as? [String:AnyObject] {
+                self.highestScore = dictionary ["highestScore"] as? String
+                self.PLAYERNAME = dictionary ["name"] as? String
+            }
+            //Scaling userName font size depending on length
+            let playerLblRect = CGRect(x: -235, y: 265, width:(self.frame.width) - 10, height: 50)
+            
+            self.highestScoreLbl?.text = self.highestScore
+            self.playerNameLbl?.text = self.PLAYERNAME
+            self.adjustLabelFontSizeToFit(labelNode: self.playerNameLbl!, rect:playerLblRect)
+            
+            activityInd.stopAnimating()
+            self.playerNameLbl?.isHidden = false
+            self.highestScoreLbl?.isHidden = false
+            self.playerNameLbl?.isHidden = false
+            self.txtHighestScoreLbl?.isHidden = false
+        })
+        
     }
+    
     
     //Custom Facebook and Firebase logout
     func customFbFirLogout() {
