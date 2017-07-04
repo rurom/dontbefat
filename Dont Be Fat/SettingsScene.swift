@@ -17,7 +17,7 @@ class SettingsScene: SKScene {
     private var backToMenu:SKSpriteNode?
     private var highestScoreLbl: SKLabelNode?
     private var playerNameLbl: SKLabelNode?
-    private var highestScore:String?
+    private var highestScore:Int = 0
     private var PLAYERNAME:String?
     private var txtHighestScoreLbl:SKLabelNode?
     
@@ -55,13 +55,14 @@ class SettingsScene: SKScene {
         usersReference.observeSingleEvent(of: .value, with: { (snapshot) in
             print(snapshot)
             if let dictionary = snapshot.value as? [String:AnyObject] {
-                self.highestScore = dictionary ["highestScore"] as? String
+                self.highestScore = (dictionary ["highestScore"] as? Int)!
                 self.PLAYERNAME = dictionary ["name"] as? String
+                print(self.highestScore)
             }
             //Scaling userName font size depending on length
             let playerLblRect = CGRect(x: -235, y: 265, width:(self.frame.width) - 10, height: 50)
             
-            self.highestScoreLbl?.text = self.highestScore
+            self.highestScoreLbl?.text = String(self.highestScore)
             self.playerNameLbl?.text = self.PLAYERNAME
             self.adjustLabelFontSizeToFit(labelNode: self.playerNameLbl!, rect:playerLblRect)
             
@@ -71,12 +72,14 @@ class SettingsScene: SKScene {
             self.playerNameLbl?.isHidden = false
             self.txtHighestScoreLbl?.isHidden = false
         })
-        
     }
-    
+
+
     
     //Custom Facebook and Firebase logout
     func customFbFirLogout() {
+        FBSDKAccessToken.setCurrent(nil)
+        FBSDKProfile.setCurrent(nil)
         FBSDKLoginManager().logOut()
         print("Successfully logout Facebook!")
         
@@ -102,7 +105,7 @@ class SettingsScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
                 }
                 
                 
@@ -113,7 +116,7 @@ class SettingsScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1))) }
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime))) }
             }
         }
     }

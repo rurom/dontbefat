@@ -17,7 +17,7 @@ private var txtCurrentScoreLbl: SKLabelNode?
 private var txtHighestScoreLbl: SKLabelNode?
 private var playAgain: SKSpriteNode?
 private var backToMenu: SKSpriteNode?
-private var highestScore:String?
+private var highestScore:Int?
 
 
 class ResultScreenScene: SKScene {
@@ -46,20 +46,20 @@ class ResultScreenScene: SKScene {
             usersReference.observeSingleEvent(of: .value, with: { (snapshot) in
                 print(snapshot)
                 if let dictionary = snapshot.value as? [String:AnyObject] {
-                   highestScore = dictionary ["highestScore"] as? String
+                   highestScore = dictionary ["highestScore"] as? Int
                 }
             
             print(highestScore ?? "")
             print(GameplayScene.playerScoreData.highestPlayerScore)
             
-            if Int(highestScore!)! > GameplayScene.playerScoreData.highestPlayerScore {
-                GameplayScene.playerScoreData.highestPlayerScore = Int(highestScore!)!
+            if highestScore! > GameplayScene.playerScoreData.highestPlayerScore {
+                GameplayScene.playerScoreData.highestPlayerScore = highestScore!
                 self.printResults()
             } else {
                 self.printResults()
-            let bestScore:String = (String(GameplayScene.playerScoreData.highestPlayerScore))
+            let bestScore:Int = GameplayScene.playerScoreData.highestPlayerScore
             
-            let values = ["highestScore":bestScore]
+                let values = ["highestScore":bestScore]
             
             // update our databse by using the child database reference above called usersReference
             usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
@@ -77,8 +77,7 @@ class ResultScreenScene: SKScene {
           })
             
         }
-        
-    
+
     
     func printResults() {
         currentScoreLbl?.text = String(GameplayScene.playerScoreData.currentPlayerScore)
@@ -98,7 +97,7 @@ class ResultScreenScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
                 }
             } else if atPoint(location).name == "playAgainBtn" {
                
@@ -107,7 +106,7 @@ class ResultScreenScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
                 }
             }
         }

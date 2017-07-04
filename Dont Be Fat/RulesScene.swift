@@ -77,7 +77,7 @@ class RulesScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
                 }
                 
                 
@@ -87,7 +87,7 @@ class RulesScene: SKScene {
                     scene.scaleMode = .aspectFill
                     
                     // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(1)))
+                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
                     
                 }
             }

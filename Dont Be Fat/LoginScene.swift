@@ -105,10 +105,10 @@ class LoginScene: SKScene {
                                     print("Users Facebook ID is:", fbUserID ?? "noId")
                                     
                                     //Best score of current user
-                                    let bestScore:String = (String(GameplayScene.playerScoreData.highestPlayerScore))
+                                    let bestScore:Int = GameplayScene.playerScoreData.highestPlayerScore
                                     print("Users best score is: \(bestScore)")
                                     
-                                    let values = ["name": userName, "email": userEmail, "facebookID": fbUserID, "highestScore":bestScore]
+                                    let values = ["name": userName, "email": userEmail, "facebookID": fbUserID, "highestScore":bestScore] as [String : Any]
                                     
                                     // update our databse by using the child database reference above called usersReference
                                     usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in

@@ -350,10 +350,7 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
                 
                 restartTimer()
             }
-
         }
-
-
     }
 
     private func initializeGame() {
@@ -384,7 +381,6 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
                 removeItemsTimer()
             }
         }
-        
     }
 
     private func managePlayer() {
@@ -402,7 +398,7 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     func gameOver() {
         if let scene = ResultScreenScene(fileNamed:"ResultScreen") {
             scene.scaleMode = .aspectFill
-            view?.presentScene(scene, transition: SKTransition.flipVertical(withDuration: TimeInterval(2)))
+            view?.presentScene(scene, transition: SKTransition.flipVertical(withDuration: TimeInterval(1.5)))
         }
     }
     
