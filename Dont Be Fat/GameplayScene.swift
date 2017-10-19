@@ -65,22 +65,22 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
     }
     
     func manageItemsSpawnSpeed() {
-        if score < 5 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 1.5))
-        } else if score >= 5 && score < 10 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.9, secondNum: 1))
+        if score < 10 {
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 1.5, secondNum: 1.9))
         } else if score >= 10 && score < 20 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.8, secondNum: 0.9))
-        } else if score >= 20 && score < 40 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.7, secondNum: 0.8))
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 1.2, secondNum: 1.5))
+        } else if score >= 20 && score < 30 {
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 1, secondNum: 1.2))
+        } else if score >= 30 && score < 40 {
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.9, secondNum: 1))
         } else if score >= 40 && score < 60 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.6, secondNum: 0.7))
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.8, secondNum: 0.9))
         } else if score >= 60 && score < 80 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.5, secondNum: 0.6))
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.7, secondNum: 0.8))
         } else if score >= 80 && score < 100 {
-            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.4, secondNum: 0.5))
+            itemsSpawnTimeInterval = TimeInterval(itemController.randomBetweenNumbers(firstNum: 0.6, secondNum: 0.7))
         } else if score >= 100 && score < 99999 {
-            itemsSpawnTimeInterval = 0.4
+            itemsSpawnTimeInterval = 0.5
         }
     }
     
@@ -395,14 +395,14 @@ class GameplayScene:SKScene, SKPhysicsContactDelegate {
         self.scene?.addChild(itemController.spawnItems())
     }
     
-    func gameOver() {
+    @objc func gameOver() {
         if let scene = ResultScreenScene(fileNamed:"ResultScreen") {
             scene.scaleMode = .aspectFill
             view?.presentScene(scene, transition: SKTransition.flipVertical(withDuration: TimeInterval(1.5)))
         }
     }
     
-    func removeItems() {
+    @objc func removeItems() {
         for child in children {
             if child.name == "healthy" || child.name == "unhealthy" {
                 if child.position.y < -self.scene!.frame.height - 100 {

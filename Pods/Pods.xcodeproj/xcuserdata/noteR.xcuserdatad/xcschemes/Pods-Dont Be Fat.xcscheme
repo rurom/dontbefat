@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E854B2BDFF2E8BBE1DB718F53935A374"
+               BlueprintIdentifier = "41C236E99703642CDAD0F2E39C92CD34"
                BuildableName = "Pods_Dont_Be_Fat.framework"
                BlueprintName = "Pods-Dont Be Fat"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,6 +26,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -36,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -45,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "E854B2BDFF2E8BBE1DB718F53935A374"
+            BlueprintIdentifier = "41C236E99703642CDAD0F2E39C92CD34"
             BuildableName = "Pods_Dont_Be_Fat.framework"
             BlueprintName = "Pods-Dont Be Fat"
             ReferencedContainer = "container:Pods.xcodeproj">

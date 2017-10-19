@@ -20,14 +20,26 @@ class GameViewController: UIViewController{
 
         if let view = self.view as! SKView? {
             
-            // Load the SKScene from 'GameScene.sks'
-            if let scene = LoginScene(fileNamed: "Login") {
-                // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
+            if(FBSDKAccessToken.current() != nil) {
+                //User are logged in so show another view
+                if let scene = MainMenuScene(fileNamed: "MainMenu") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFill
+                    // Present the scene
+                    view.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))}
+            } else {
+                //User need to log in
                 
-                // Present the scene
-                view.presentScene(scene)
-            }            
+                // Load the SKScene from 'GameScene.sks'
+                if let scene = LoginScene(fileNamed: "Login") {
+                    // Set the scale mode to scale to fit the window
+                    scene.scaleMode = .aspectFill
+                    
+                    // Present the scene
+                    view.presentScene(scene)
+            }
+            
+            }
             view.ignoresSiblingOrder = true
             
             view.showsPhysics = false

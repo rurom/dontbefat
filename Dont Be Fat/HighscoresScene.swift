@@ -10,8 +10,10 @@ import SpriteKit
 import UIKit
 
 private var backToMenu: SKSpriteNode?
+private var shareApp: SKSpriteNode?
 private let top10View = Top10TableViewController()
 private let amongFriendsView = AmongFriendsTableViewController()
+private var noFriendsImgView = UIImageView()
 
 let topScoresSegmentedControl:UISegmentedControl = {
     let sc = UISegmentedControl(items:["Top 10", "Among friends"])
@@ -21,7 +23,7 @@ let topScoresSegmentedControl:UISegmentedControl = {
     sc.backgroundColor = UIColor.black
     sc.tintColor = UIColor.white
     
-    sc.setTitleTextAttributes([ NSFontAttributeName: UIFont(name: "Phosphate-Inline", size: 14.0)! ], for: .normal)
+    sc.setTitleTextAttributes([ NSAttributedStringKey.font: UIFont(name: "Phosphate-Inline", size: 14.0)! ], for: .normal)
     
     return sc
 }()
@@ -30,25 +32,22 @@ class HighscoresScene: SKScene {
     
     override func didMove(to view: SKView) {
         
-        
         backToMenu = childNode(withName: "backToMenuBtn") as? SKSpriteNode
         
         view.addSubview(topScoresSegmentedControl)
-        
-        topScoresSegmentedControl.selectedSegmentIndex = 0
-        if topScoresSegmentedControl.selectedSegmentIndex == 0 {
-            handleTop10 ()
-        }
-        
         topScoresSegmentedControl.isHidden = false
         top10View.view.isHidden = false
         
+        topScoresSegmentedControl.selectedSegmentIndex = 0
+        if topScoresSegmentedControl.selectedSegmentIndex == 0 {
+            
+            handleTop10 ()
+        }
+  
         setupScConstraints()
-        
         
         // Add target action method
         topScoresSegmentedControl.addTarget(self, action: #selector(scChanged), for: .valueChanged)
-        
     }
     
     // x, y, width, height constraints for all iPhone's
@@ -63,7 +62,7 @@ class HighscoresScene: SKScene {
     
     
     //Handler for Segmented Control
-    func scChanged(sender: UISegmentedControl) {
+    @objc func scChanged(sender: UISegmentedControl) {
         
         switch sender.selectedSegmentIndex {
         case 1:
@@ -78,6 +77,7 @@ class HighscoresScene: SKScene {
             handleTop10 ()
             top10View.view.isHidden = false
             amongFriendsView.view.isHidden = true
+            noFriendsImgView.isHidden = true
             break
         }
     }
@@ -86,34 +86,49 @@ class HighscoresScene: SKScene {
     //set rect and add subview for top10TableViewController
     func handleTop10 () {
         
+        top10View.fetchUser()
+        top10View.fetchUserfriends()
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
 
-        let smallerRect = CGRect(x: 0, y: 47, width: (view?.frame.width)!, height:(view?.frame.height)! * 0.7 )
+        let smallerRect = CGRect(x: 0, y: 47, width: (view?.frame.width)!, height:(view?.frame.height)! * 0.8 )
         top10View.view.frame = smallerRect
-        top10View.fetchUser()
         view?.addSubview(top10View.view)
-
+        top10View.getUserData()
     }
     
     //set rect and add subview for AmongFriendsTableViewController
     func handleAmongFriends() {
+    
+        amongFriendsView.userfriendsScore()
         
         anchorPoint = CGPoint(x: 0.5, y: 0.5)
         
-        let smallerRect = CGRect(x: 0, y: 47, width: (view?.frame.width)!, height:(view?.frame.height)! * 0.7 )
+        let smallerRect = CGRect(x: 0, y: 47, width: (view?.frame.width)!, height:(view?.frame.height)! * 0.8 )
         amongFriendsView.view.frame = smallerRect
-        view?.addSubview(amongFriendsView.view)
+        
+        noFriendsImgView = UIImageView(frame:smallerRect)
+        noFriendsImgView.image = UIImage(named: "noFriends.png")
+        
+        
+        if let friendsCount = friendsScoresArr.count as? Int {
+            if friendsCount > 0 {
+                view?.addSubview(amongFriendsView.view)
+//                view?.addSubview(invFriendsView.view)
+            } else {
+                view?.addSubview(noFriendsImgView)
+            }
+        }
     }
     
    func backBtnHandler() {
     
-    topScoresSegmentedControl.isHidden = true
-    
-    topScoresSegmentedControl.isHidden = true
+    noFriendsImgView.isHidden = true
     top10View.view.isHidden = true
     amongFriendsView.view.isHidden = true
+    topScoresSegmentedControl.isHidden = true
 
 }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -132,9 +147,17 @@ class HighscoresScene: SKScene {
                     // Present the scene
                     view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(0.2)))
                 }
-            } else if atPoint(location).name == "removeViewBtn" {
+            } else if atPoint(location).name == "shareAppBtn" {
                 
-                           }
+//                if(SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook)) {
+//                    let socialController = SLComposeViewController(forServiceType: SLServiceTypeFacebook)
+//                    //            socialController.setInitialText("Hello World!")
+//                    //            socialController.addImage(someUIImageInstance)
+//                    //            socialController.addURL(someNSURLInstance)
+//                    
+//                    self.presentViewController(socialController, animated: true, completion: nil)
+//                }
+            }
         }
     }
 

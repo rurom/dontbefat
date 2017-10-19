@@ -13,4 +13,6 @@ class User: NSObject {
     var facebookID:String?
     var email:String?
     var highestScore:Int = 0
+    var friends:NSDictionary?
+    var profilePictureURL:String?
 }

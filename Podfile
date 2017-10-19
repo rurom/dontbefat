@@ -10,9 +10,9 @@ target 'Dont Be Fat' do
 pod 'FBSDKCoreKit'
 pod 'FBSDKShareKit'
 pod 'FBSDKLoginKit'
-pod 'Firebase/Auth’
-pod 'Firebase/Database’
-pod 'Firebase/Storage’
-
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
+pod 'Firebase/Storage'
+pod 'FBSDKCoreKit'
 
 end

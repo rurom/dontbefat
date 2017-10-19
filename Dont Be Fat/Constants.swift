@@ -9,4 +9,3 @@
 import Foundation
 
 let transitionTime:Float = 0.9
-

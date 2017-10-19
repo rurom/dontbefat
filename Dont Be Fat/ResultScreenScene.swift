@@ -18,6 +18,7 @@ private var txtHighestScoreLbl: SKLabelNode?
 private var playAgain: SKSpriteNode?
 private var backToMenu: SKSpriteNode?
 private var highestScore:Int?
+private var marker:String = ""
 
 
 class ResultScreenScene: SKScene {
@@ -32,15 +33,14 @@ class ResultScreenScene: SKScene {
         playAgain = childNode(withName: "playAgainBtn") as? SKSpriteNode
         
         let currentScore = GameplayScene.playerScoreData.currentPlayerScore
-        //var highestScore = GameplayScene.playerScoreData.highestPlayerScore
         
         if currentScore > GameplayScene.playerScoreData.highestPlayerScore {
             GameplayScene.playerScoreData.highestPlayerScore = currentScore
         }
             // adding a reference to firebase database
-            let ref = FIRDatabase.database().reference(fromURL: "https://dont-be-fat-a6f79.firebaseio.com/")
+        let ref = Database.database().reference(fromURL: "https://dont-be-fat-a6f79.firebaseio.com/")
             // create a child reference - uid will let us wrap each users data in a unique user id for later reference
-            let uid = FIRAuth.auth()?.currentUser?.uid
+        let uid = Auth.auth().currentUser?.uid
             let usersReference = ref.child("users").child(uid!)
             
             usersReference.observeSingleEvent(of: .value, with: { (snapshot) in
@@ -92,23 +92,77 @@ class ResultScreenScene: SKScene {
             let location = touch.location(in: self)
             
             if atPoint(location).name == "backToMenuBtn" {
-                if let scene = MainMenuScene(fileNamed: "MainMenu") {
-                    // Set the scale mode to scale to fit the window
-                    scene.scaleMode = .aspectFill
-                    
-                    // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
-                }
+                marker = "backToMenu"
+                internetReachability()
+                
             } else if atPoint(location).name == "playAgainBtn" {
-               
-                if let scene = GameplayScene(fileNamed: "GamePlay") {
-                    // Set the scale mode to scale to fit the window
-                    scene.scaleMode = .aspectFill
-                    
-                    // Present the scene
-                    view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
+               marker = "playAgain"
+               internetReachability()
+            }
+        }
+    }
+    
+    //Check the internet reachability
+    func internetReachability() {
+        
+        let reachability =  InternetReachability()!
+        //reachability.isReachable is deprecated, right solution --> connection != .none
+        if reachability.connection != .none {
+            //reachability.isReachableViaWiFi is deprecated, right solution --> connection == .wifi
+            if reachability.connection == .wifi {
+                DispatchQueue.main.async {
+                    print("Internet via WIFI is OK!")
+                    self.goToScene()
+                }
+                
+            } else {
+                DispatchQueue.main.async {
+                    print("Internet via Cellular is OK!")
+                    self.goToScene()
                 }
             }
+        } else {
+            
+            print("Please check your Internet connection!")
+            inetAlert()
+        }
+    }
+    
+    func inetAlert() {
+        //Alert Pop-up no internet connection
+        let alertController = UIAlertController(title: "", message: "Your result can not be saved! Please, check your internet connection!", preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertController.addAction(defaultAction)
+        self.view?.window?.rootViewController?.present(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func goBackToMenu() {
+        if let scene = MainMenuScene(fileNamed: "MainMenu") {
+            // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFill
+            
+            // Present the scene
+            view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
+        }
+    }
+    
+    func goPlayAgain() {
+        if let scene = GameplayScene(fileNamed: "GamePlay") {
+            // Set the scale mode to scale to fit the window
+            scene.scaleMode = .aspectFill
+            
+            // Present the scene
+            view!.presentScene(scene, transition:SKTransition.crossFade(withDuration: TimeInterval(transitionTime)))
+        }
+    }
+    
+    func goToScene() {
+        if marker == "backToMenu" {
+            goBackToMenu()
+        }
+        if marker == "playAgain" {
+            goPlayAgain()
         }
     }
     

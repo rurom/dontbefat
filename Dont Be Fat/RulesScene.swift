@@ -45,7 +45,7 @@ class RulesScene: SKScene {
         }
     
     
-        func swipedRight(sender: UISwipeGestureRecognizer) {
+        @objc func swipedRight(sender: UISwipeGestureRecognizer) {
             
             if rulesPageNumber > 1 {
                 rulesPageNumber-=1
@@ -55,7 +55,7 @@ class RulesScene: SKScene {
             
         }
     
-        func swipedLeft(sender: UISwipeGestureRecognizer) {
+        @objc func swipedLeft(sender: UISwipeGestureRecognizer) {
         
             if rulesPageNumber < 3 {
                 rulesPageNumber+=1
